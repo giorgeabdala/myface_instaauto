@@ -11,7 +11,7 @@ const optionsStory = {
     xpath_close_story: '//div[@class="_ac0g"]/button[@class="_abl-" ]',
     xpath_like_story: '//span/button[@class="_abl-" ]',
     xpath_next_story: '//button[@aria-label="Next"]',
-    xpath_firs_story: '//button[@class="_aam8"]',
+    xpath_first_story: '//button[@class="_aam8"]',
     like_percent: 0.6
 };
 

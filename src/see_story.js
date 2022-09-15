@@ -46,7 +46,7 @@ async function see_story() {
        return  next_story();
 
     } catch (err) {
-        console.error(err + "Erro ao ver story");
+        console.error(err + "Error in see story");
         return false;
     }
 
@@ -61,13 +61,13 @@ async function next_story() {
 
 async function like_story(){
     try {
-        console.log("Fazendo like na story...");
+        console.log("Liking Story...");
         await Instaauto.page.waitForXPath(options.xpath_like_story);
         const button = await Instaauto.page.$x(options.xpath_like_story);
         await button[0].click();
         return next_story();
     } catch (err) {
-        console.error(err + "Erro ao dar like");
+        console.error(err + "Error in like story");
     }
 
 }
@@ -80,20 +80,27 @@ async function close_story() {
         const buttons = await Instaauto.page.$x(options.xpath_close_story);
         return buttons[0].click();
     } catch (err) {
-        console.error(err + "Erro ao fechar story. Provavelmente já está fechado");
+        console.error(err + "Error in close story. Maybe not have story");
     }
 
 }
 
 async function first_story() {
-    const buttons = await Instaauto.page.$x(options.xpath_firs_story);
-    return buttons[0].click();
+    try {
+        await Instaauto.page.waitForXPath(options.xpath_first_story);
+        const buttons = await Instaauto.page.$x(options.xpath_first_story);
+        await Instaauto.browser.sleep(1000);
+        return buttons[0].click();
+    } catch (err) {
+        console.error(err + "Error in open first story");
+    }
+
 }
 
 async function random_sleep() {
     //gera um numero entre 2 minutos e 10 minutos
     const random = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
-    console.log("esperando " + random/60000 + " minutos");
+    console.log("Waiting " + random/60000 + " minutes");
     await Instaauto.browser.sleep(random);
 
 }
@@ -105,7 +112,7 @@ async function open_insta() {
         await Instaauto.browser.sleep(3000);
         return true;
     } catch (err) {
-        console.error(err + "Erro ao abrir instagram");
+        console.error(err + "Error in open insta");
         return false;
     }
 

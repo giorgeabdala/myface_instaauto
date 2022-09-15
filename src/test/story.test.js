@@ -1,5 +1,3 @@
-const {optionsStory: options} = require("../Options");
-const getInstaAuto = require("../instaauto_conecction");
 const seeStory = require("../see_story");
 
 
@@ -27,7 +25,8 @@ describe('Testa as funções de visualização de story', () => {
     it ('Testa se está fechando o story', async () => {
         await seeStory.open_insta();
         await seeStory.first_story();
-        return expect(seeStory.close_story()).resolves;
+        close = await seeStory.close_story();
+        return expect(close).resolves;
     } );
 
     it ('Testa se está passando para o próximo story', async () => {
