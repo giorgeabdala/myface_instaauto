@@ -1,23 +1,10 @@
 const getInstaAuto = require("./instaauto_conecction");
-
+const {optionsStory: options} = require("./Options");
 
 const Instaauto = {
     browser: null,
     page: null,
 }
-
-const options = {
-    urlInstagram: 'https://www.instagram.com/',
-    xpath_close_story: '//div[@class="_ac0g"]/button[@class="_abl-" ]',
-    xpath_like_story: '//span/button[@class="_abl-" ]',
-    xpath_next_story: '//button[@aria-label="Next"]',
-    xpath_firs_story: '//button[@class="_aam8"]'
-}
-
-
-//porcentagem de storys que será likeado
-const LIKE_PERCENT = 0.6;
-
 
 async function start_see_story() {
     try {
@@ -44,34 +31,43 @@ async function start_see_story() {
 }
 
 async function see_story() {
-    await Instaauto.browser.sleep(1000);
-    //verifica se a page tem o botão de pausar. Só aparece na tela de stories
-    const is_story_screen = await Instaauto.page.$x(options.xpath_close_story);
-    if (is_story_screen.length < 1)
-        await first_story();
-    await Instaauto.browser.sleep(1000);
-    //gera um numeror aleatorio entre 0 e 1
-    const random = Math.random();
-    const isLike = random <= LIKE_PERCENT;
-    isLike ? await like_story() : await next_story();
+    try {
+        await Instaauto.browser.sleep(1000);
+        //verifica se a page tem o botão de pausar. Só aparece na tela de stories
+        const is_story_screen = await Instaauto.page.$x(options.xpath_close_story);
+        if (is_story_screen.length < 1)
+            await first_story();
+        await Instaauto.browser.sleep(1000);
+        //gera um numeror aleatorio entre 0 e 1
+        const random = Math.random();
+        const isLike = random <= options.like_percent;
+        if (isLike)
+            return like_story();
+       return  next_story();
+
+    } catch (err) {
+        console.error(err + "Error in see story");
+        return false;
+    }
+
 }
 
 async function next_story() {
     await Instaauto.browser.sleep(2000);
     await Instaauto.page.waitForXPath(options.xpath_next_story);
     const buttons = await Instaauto.page.$x(options.xpath_next_story);
-    await buttons[0].click();
+    return buttons[0].click();
 }
 
 async function like_story(){
     try {
-        console.log("Fazendo like na story...");
+        console.log("Liking Story...");
         await Instaauto.page.waitForXPath(options.xpath_like_story);
         const button = await Instaauto.page.$x(options.xpath_like_story);
         await button[0].click();
-        next_story();
+        return next_story();
     } catch (err) {
-        console.error(err + "Erro ao dar like");
+        console.error(err + "Error in like story");
     }
 
 }
@@ -82,37 +78,56 @@ async function close_story() {
         console.log("Closing Story...");
         await Instaauto.page.waitForXPath(options.xpath_close_story);
         const buttons = await Instaauto.page.$x(options.xpath_close_story);
-        await buttons[0].click();
+        return buttons[0].click();
     } catch (err) {
-        console.error(err + "Erro ao fechar story. Provavelmente já está fechado");
+        console.error(err + "Error in close story. Maybe not have story");
     }
 
 }
 
 async function first_story() {
-   // await Instaauto.page.waitForXPath(options.xpath_firs_story);
-    const buttons = await Instaauto.page.$x(options.xpath_firs_story);
-    await buttons[0].click();
+    try {
+        await Instaauto.page.waitForXPath(options.xpath_first_story);
+        const buttons = await Instaauto.page.$x(options.xpath_first_story);
+        await Instaauto.browser.sleep(1000);
+        return buttons[0].click();
+    } catch (err) {
+        console.error(err + "Error in open first story");
+    }
+
 }
 
 async function random_sleep() {
     //gera um numero entre 2 minutos e 10 minutos
     const random = Math.floor(Math.random() * (300000 - 120000 + 1)) + 120000;
-    console.log("esperando " + random/60000 + " minutos");
+    console.log("Waiting " + random/60000 + " minutes");
     await Instaauto.browser.sleep(random);
 
 }
 
 async function open_insta() {
-    await Instaauto.page.goto(options.urlInstagram);
-    await Instaauto.page.setViewport({width: 1280, height: 800});
-    await Instaauto.browser.sleep(3000);
+    try {
+        await Instaauto.page.goto(options.urlInstagram);
+        await Instaauto.page.setViewport({width: 1280, height: 800});
+        await Instaauto.browser.sleep(3000);
+        return true;
+    } catch (err) {
+        console.error(err + "Error in open insta");
+        return false;
+    }
+
 }
 
-async function init() {
-    Instaauto.browser = await getInstaAuto();
+async function init(headless = false) {
+    Instaauto.browser = await getInstaAuto(headless);
     Instaauto.page = await Instaauto.browser.getPage();
 }
 
-start_see_story();
+async function close() {
+    await Instaauto.browser.close();
+}
+
+//start_see_story();
+
+module.exports = {start_see_story, like_story, init, open_insta, close_story, first_story, next_story, see_story};
 

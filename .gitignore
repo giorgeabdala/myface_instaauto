@@ -5,3 +5,17 @@
 /.idea/
 /src/Config.js
 src/cookies.jsonrm 
+
+coverage/
+
+*.jsonrm 
+
+*.jsonrm 
+
+cookies.jsonrm 
+
+*.jsonrm 
+
+*.jsonrm 
+
+cookies.jsonrm 
