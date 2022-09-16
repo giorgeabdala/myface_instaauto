@@ -1,54 +1,25 @@
-const getInstaAuto = require("./instaauto_conecction");
-
-async function likeFeed() {
-    const instauto = await getInstaAuto();
-    await instauto.followUser('cisenir');
-    await instauto.likeUserFeed('cisenir');
-    await instauto.end();
-
-}
-
-async function FollowFollowers() {
-    try {
-        const instauto = await getInstaAuto();
-        const usersToFollowFollowersOf = ['ciliosclub'];
-        const unfollowedCount = 0;
-        const totalmaxFollows = 150;
-        let loopCount = 0;
+const see_story = require('./see_story');
+const follonw_follower = require('./follow_followers');
 
 
-        while (true) {
-
-            console.log('loopCount: ', loopCount+1);
-
-            // Now go through each of these and follow a certain amount of their followers
-            await instauto.followUsersFollowers({
-                usersToFollowFollowersOf,
-                maxFollowsTotal: 150,
-                skipPrivate: true,
-                enableLikeImages: true,
-                likeImagesMax: 3,
-            });
-
-            await instauto.sleep(10 * 60 * 1000);
-
-            console.log('Done running');
-
-            await instauto.sleep(30000);
-
+async function start_boot(){
+    while (true){
+        //gera numero aleatorio entre 0 e 1
+        let random = Math.random();
+        //se o numero for menor que 0.5 ele vai ver uma historia
+        if (random < 0.5){
+            await see_story.start_see_story();
+        }else{
+            await follonw_follower.start_follow_followers();
         }
-
-    } catch (err) {
-        console.error(err);
-    } finally {
-        console.log('Closing browser');
-        if (browser) await browser.close();
-    }
-
-
+   }
 }
 
-FollowFollowers();
+
+start_boot();
+
+
+
 
 
 

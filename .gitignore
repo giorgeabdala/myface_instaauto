@@ -3,7 +3,7 @@
 /.idea/jsLibraryMappings.xml
 /.idea/vcs.xml
 /.idea/
-/src/Config.js
+/src/config/Config.js
 src/cookies.jsonrm 
 
 coverage/
@@ -17,5 +17,11 @@ cookies.jsonrm
 *.jsonrm 
 
 *.jsonrm 
+
+cookies.jsonrm 
+/followed.json
+/liked-photos.json
+/unfollowed.json
+/cookies.jsonrm 
 
 cookies.jsonrm 
