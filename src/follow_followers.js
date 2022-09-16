@@ -7,7 +7,7 @@ let Bot = {
 }
 
 async function start_follow_followers(headless = false) {
-    follow_followers(optionsFollowFollowers);
+    follow_followers(headless,optionsFollowFollowers);
     await Bot.instauto.sleep(10 * 60 * 1000);
     console.log('Done running');
     await Bot.instauto.sleep(15000);
