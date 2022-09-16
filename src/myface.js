@@ -8,9 +8,9 @@ async function start_boot(){
         let random = Math.random();
         //se o numero for menor que 0.5 ele vai ver uma historia
         if (random < 0.5){
-            await see_story.start_see_story();
+            await see_story.start_see_story(false);
         }else{
-            await follonw_follower.start_follow_followers();
+            await follonw_follower.start_follow_followers(false);
         }
    }
 }
