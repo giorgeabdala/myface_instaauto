@@ -1,4 +1,7 @@
 const seeStory = require("../see_story");
+const followFollowers = require("../follow_followers");
+const BotFactory = require("../instauto/conecction").BotFactory;
+const {optionsFollowFollowers} = require("../config/Options");
 
 
 beforeAll(async () => {
@@ -11,6 +14,11 @@ afterAll(async () => {
 
 describe('Testa as funções de visualização de story', () => {
     jest.setTimeout(300000);
+
+    it('Testa a factory do Bot', async () => {
+        expect(await BotFactory(true)).resolves;
+    } );
+
 
     it('Testa se está abrindo o insta', async () => {
         open = await seeStory.open_insta();
@@ -46,7 +54,25 @@ describe('Testa as funções de visualização de story', () => {
         return expect(seeStory.see_story()).resolves;
     } );
 
-
-
+    it('Testa a função de fechar Instaauto e Browser', async () => {
+        return expect(await seeStory.close()).resolves;
+    } );
 
 } );
+
+describe("Testa a função de seguir seguidores", () => {
+    jest.setTimeout(300000);
+
+    it("Deve começar a seguir os seguidores", async () => {
+        options = optionsFollowFollowers;
+        options.maxFollowsTotal = 1;
+        options.likeImagesMax = 1;
+        return expect(await followFollowers.follow_followers(true, options, 1)).resolves;
+    })
+
+
+    });
+
+
+
+

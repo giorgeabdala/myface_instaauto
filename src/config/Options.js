@@ -5,6 +5,13 @@ const Config = require("./Config");
 const log = (fn, ...args) => console[fn](new Date().toISOString(), ...args);
 const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'warn'].map((fn) => [fn, (...args) => log(fn, ...args)]));
 
+const optionsFollowFollowers = {
+    usersToFollowFollowersOf: ['ciliosclub', 'cilioscuritibastudio', 'studiocarol.silva', 'amanda.lashh', 'jacque.bodner', 'cilios_curitiba', 'manuellalashdesigner_', 'studiodannimiranda', 'julianapiassi_olhar','cilios_julianaborges', 'ciliosmai.curitiba',  'donnadesioficialcilios', 'heloferreira.beauty', 'daniele.souzalashdesign', 'thaillasantos_'],
+    maxFollowsTotal: 5,
+    skipPrivate: false,
+    enableLikeImages: true,
+    likeImagesMax: 2,
+}
 
 const optionsStory = {
     urlInstagram: 'https://www.instagram.com/',
@@ -15,7 +22,6 @@ const optionsStory = {
     like_percent: 0.6
 };
 
-
 const options = {
     cookiesPath: './cookies.jsonrm ',
 
@@ -23,9 +29,9 @@ const options = {
     password: Config.password,
 
     // Global limit that prevents follow or unfollows (total) to exceed this number over a sliding window of one hour:
-    maxFollowsPerHour: 20,
+    maxFollowsPerHour: 26,
     // Global limit that prevents follow or unfollows (total) to exceed this number over a sliding window of one day:
-    maxFollowsPerDay: 150,
+    maxFollowsPerDay: 200,
     // (NOTE setting the above parameters too high will cause temp ban/throttle)
 
     maxLikesPerDay: 100,
@@ -77,4 +83,4 @@ const options = {
     logger,
 };
 
-module.exports = {options, optionsStory};
+module.exports = {options, optionsStory, optionsFollowFollowers};

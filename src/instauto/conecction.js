@@ -1,10 +1,16 @@
 'use strict';
 
 const puppeteer = require('puppeteer');
-const {options  }   = require('./Options');
-//const Instauto = require('instauto');
+const {options  }   = require('../config/Options');
 const Instauto = require('./index');
-const Config = require("./Config"); // eslint-disable-line import/no-unresolved
+
+const Bot = {
+    instauto: null,
+    page: null,
+}
+
+
+
 let instance_InstaAuto = null;
 let instance_InstaAuto_headless = null;
 
@@ -48,4 +54,19 @@ async function getInstaAuto(headless= false) {
     return instance_InstaAuto;
 }
 
-module.exports = getInstaAuto;
+async function BotFactory(headless = false) {
+    try {
+        Bot.instauto = await getInstaAuto(headless);
+        Bot.page = await Bot.instauto.getPage();
+        return Bot;
+    } catch (err) {
+        console.error(err + "Error in init");
+        throw new Error(err);
+    }
+
+
+}
+
+
+
+module.exports = {getInstaAuto, BotFactory};

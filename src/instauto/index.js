@@ -27,8 +27,11 @@ function escapeXpathStr(str) {
 
 const botWorkShiftHours = 16;
 
-const dayMs = 24 * 60 * 60 * 1000;
-const hourMs = 60 * 60 * 1000;
+let sleepTime = 60;
+const dayMs = 24 * sleepTime * sleepTime * 1000;
+const hourMs = sleepTime * sleepTime * 1000;
+
+
 
 const Instauto = async (db, browser, options) => {
     const {
@@ -779,12 +782,12 @@ const Instauto = async (db, browser, options) => {
             try {
                 await processUserFollowers(username, { maxFollowsPerUser, skipPrivate, enableLikeImages, likeImagesMin, likeImagesMax });
 
-                await sleep(10 * 60 * 1000);
+                await sleep(10 * sleepTime * 1000);
                 await throttle();
             } catch (err) {
                 logger.error('Failed to process user followers, continuing', username, err);
                 await takeScreenshot();
-                await sleep(60 * 1000);
+                await sleep(sleepTime * 1000);
             }
         }
     }
@@ -820,7 +823,7 @@ const Instauto = async (db, browser, options) => {
 
                                 if (j % 10 === 0) {
                                     logger.log('Have unfollowed 10 users since last break. Taking a break');
-                                    await sleep(10 * 60 * 1000, 0.1);
+                                    await sleep(10 * sleepTime * 1000, 0.1);
                                 }
                             }
                         }
@@ -1139,7 +1142,7 @@ const Instauto = async (db, browser, options) => {
         function condition(username) {
             return getPrevFollowedUser(username) &&
                 !excludeUsers.includes(username) &&
-                (new Date().getTime() - getPrevFollowedUser(username).time) / (1000 * 60 * 60 * 24) > ageInDays;
+                (new Date().getTime() - getPrevFollowedUser(username).time) / (1000 * sleepTime * sleepTime * 24) > ageInDays;
         }
 
         return safelyUnfollowUserList(followingUsersGenerator, limit, condition);
@@ -1153,6 +1156,14 @@ const Instauto = async (db, browser, options) => {
 
         return allFollowing.filter(u =>
             !getPrevFollowedUser(u) && !excludeUsers.includes(u));
+    }
+
+    async function close() {
+        await browser.close();
+    }
+
+    async function set_sleep(sl) {
+        sleepTime = sl;
     }
 
     return {
@@ -1173,6 +1184,8 @@ const Instauto = async (db, browser, options) => {
         followUsersFollowers: processUsersFollowers,
         doesUserFollowMe,
         navigateToUserAndGetData,
+        close,
+        set_sleep
     };
 };
 
