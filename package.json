@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "4.1.2",
     "instauto": "^9.1.11",
     "puppeteer": "^17.1.3"
   },
