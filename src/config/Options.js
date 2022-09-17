@@ -55,7 +55,11 @@ const options = {
 
     shouldFollowUser: function (data) {
         console.log('isBusinessAccount:', data.isBusinessAccount);
-        return !data.isBusinessAccount;
+        console.log('isProfessionalAccount:', data.isProfessionalAccount);
+        console.log('fullName:', data.fullName);
+        if (data.isBusinessAccount || data.isProfessionalAccount) {
+            return false;
+        }
     },
 
     /* Example to skip accounts with 'crypto' & 'bitcoin' in their bio or username
