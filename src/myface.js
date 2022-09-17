@@ -22,5 +22,3 @@ async function start_boot(){
 
 start_boot();
 
-
-
