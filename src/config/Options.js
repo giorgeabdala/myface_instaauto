@@ -7,7 +7,7 @@ const log = (fn, ...args) => console[fn](new Date().toISOString(), ...args);
 const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'warn'].map((fn) => [fn, (...args) => log(fn, ...args)]));
 
 const optionsFollowFollowers = {
-    usersToFollowFollowersOf: ['ciliosclub', 'cilioscuritibastudio', 'studiocarol.silva', 'amanda.lashh', 'jacque.bodner', 'cilios_curitiba', 'manuellalashdesigner_', 'studiodannimiranda', 'julianapiassi_olhar','cilios_julianaborges', 'ciliosmai.curitiba',  'donnadesioficialcilios', 'heloferreira.beauty', 'daniele.souzalashdesign', 'thaillasantos_'],
+    usersToFollowFollowersOf: Config.usersToFollowFollowersOf,
     maxFollowsTotal: 60,
     skipPrivate: false,
     enableLikeImages: true,
@@ -34,9 +34,7 @@ const options = {
     // Global limit that prevents follow or unfollows (total) to exceed this number over a sliding window of one day:
     maxFollowsPerDay: 200,
     // (NOTE setting the above parameters too high will cause temp ban/throttle)
-
     maxLikesPerDay: 100,
-
     // Don't follow users that have a followers / following ratio less than this:
     followUserRatioMin: 0.2,
     // Don't follow users that have a followers / following ratio higher than this:
@@ -53,31 +51,20 @@ const options = {
     // Custom logic filter for user follow
     //shouldFollowUser: null,
     //Example to skip bussiness accounts
-
     shouldFollowUser: function (data) {
         console.log(chalk.blue('isBusinessAccount:', data.isBusinessAccount));
         console.log(chalk.blue('isProfessionalAccount:', data.isProfessionalAccount));
         console.log(chalk.blue('fullName:', data.fullName));
         if (data.isBusinessAccount || data.isProfessionalAccount) return false;
 
-        return true;
+        console.log(chalk.blue('username:', data.username));
+        console.log(chalk.blue('Bio:', data.biography));
+        let keywords = Config.KeyExcludes;
+        return !(keywords.find(v => data.username.includes(v)) !== undefined || keywords.find(v => data.biography.includes(v)) !== undefined);
     },
 
-    /* Example to skip accounts with 'crypto' & 'bitcoin' in their bio or username
-    shouldFollowUser: function (data) {
-      console.log('username:', data.username, 'biography:', data.biography);
-      var keywords = ['crypto', 'bitcoin'];
-      if (keywords.find(v => data.username.includes(v)) !== undefined || keywords.find(v => data.biography.includes(v)) !== undefined) {
-        return false;
-      }
-      return true;
-    }, */
-
     // NOTE: The dontUnfollowUntilTimeElapsed option is ONLY for the unfollowNonMutualFollowers function
-    // This specifies the time during which the bot should not touch users that it has previously followed (in milliseconds)
-    // After this time has passed, it will be able to unfollow them again.
-    // TODO should remove this option from here
-    dontUnfollowUntilTimeElapsed: 3 * 24 * 60 * 60 * 1000,
+    dontUnfollowUntilTimeElapsed: 30 * 24 * 60 * 60 * 1000,
 
     // Usernames that we should not touch, e.g. your friends and actual followings
     excludeUsers: [],

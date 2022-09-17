@@ -6,19 +6,26 @@ let Bot = {
     browser: null,
 }
 
-async function start_follow_followers(sleep, headless = false) {
-    if(!Bot.instauto) Bot = await BotFactory(headless);
-    follow_followers(headless,optionsFollowFollowers, sleep);
-    await Bot.instauto.sleep(10 * 60 * 1000);
-    console.log('Done running');
-    await Bot.instauto.sleep(15000);
-}
 
-async function follow_followers(headless = false, options = optionsFollowFollowers, sleep = 60) {
+async function follow_followers(headless = false, sleep = 60, options = optionsFollowFollowers) {
     try {
         if(!Bot.instauto) Bot = await BotFactory(headless);
         await Bot.instauto.set_sleep(sleep);
         await Bot.instauto.followUsersFollowers(options);
+        await Bot.instauto.sleep(10 * sleep * 1000);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        console.log('Closing browser');
+        if (Bot.instauto) await Bot.instauto.close();
+    }
+}
+
+async function unfollow_non_followers(headless = false, max = 10) {
+    try {
+        if(!Bot.instauto) Bot = await BotFactory(headless);
+        await Bot.instauto.set_sleep(sleep);
+        await Bot.instauto.unfollowNonMutualFollowers( {limit: max} );
     } catch (err) {
         console.error(err);
     } finally {
@@ -28,4 +35,4 @@ async function follow_followers(headless = false, options = optionsFollowFollowe
 }
 
 
-module.exports = {start_follow_followers, follow_followers};
+module.exports = {follow_followers, unfollow_non_followers};

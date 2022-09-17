@@ -178,7 +178,7 @@ const Instauto = async (db, browser, options) => {
 
     function haveRecentlyFollowedUser(username) {
         const followedUserEntry = getPrevFollowedUser(username);
-        if (!followedUserEntry) return false; // We did not previously follow this user, so don't know
+        if (!followedUserEntry) return true; // We did not previously follow this user, so don't know. Alterado para retornar true e nao dar unFollow caso o usuario nao tenha sido seguido anteriormente pelo bot
         return new Date().getTime() - followedUserEntry.time < dontUnfollowUntilTimeElapsed;
     }
 
@@ -1087,17 +1087,12 @@ const Instauto = async (db, browser, options) => {
     async function unfollowNonMutualFollowers({ limit } = {}) {
         logger.log(`Unfollowing non-mutual followers (limit ${limit})...`);
 
-        /* const allFollowers = await getFollowersOrFollowing({
-          userId: myUserId,
-          getFollowers: true,
-        }); */
         const allFollowingGenerator = getFollowersOrFollowingGenerator({
             userId: myUserId,
             getFollowers: false,
         });
 
         async function condition(username) {
-            // if (allFollowers.includes(u)) return false; // Follows us
             if (excludeUsers.includes(username)) return false; // User is excluded by exclude list
             if (haveRecentlyFollowedUser(username)) {
                 logger.log(`Have recently followed user ${username}, skipping`);
@@ -1185,7 +1180,7 @@ const Instauto = async (db, browser, options) => {
         doesUserFollowMe,
         navigateToUserAndGetData,
         close,
-        set_sleep
+        set_sleep,
     };
 };
 

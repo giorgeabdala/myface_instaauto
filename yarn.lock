@@ -547,9 +547,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@sinclair/typebox@^0.24.1":
-  "integrity" "sha512-TJCgQurls4FipFvHeC+gfAzb+GGstL0TDwYJKQVtTeSvJIznWzP7g3bAd5gEBlr8+bIxqnWS9VGVWREDhmE8jA=="
-  "resolved" "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.41.tgz"
-  "version" "0.24.41"
+  "integrity" "sha512-d+2AtrHGyWek2u2ITF0lHRIv6Tt7X0dEHW+0rP+5aDCEjC3fiN2RBjrLD0yU0at52BcZbRGxLbAtXiR0hFCjYw=="
+  "resolved" "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.42.tgz"
+  "version" "0.24.42"
 
 "@sinonjs/commons@^1.7.0":
   "integrity" "sha512-xkNcLAn/wZaX14RPlwizcKicDk9G3F8m2nU3L7Ukm5zBgTwiT0wsoFAHx9Jq56fJA1z/7uKGtCRu16sOUCLIHQ=="
@@ -856,9 +856,9 @@
   "version" "6.3.0"
 
 "caniuse-lite@^1.0.30001400":
-  "integrity" "sha512-Mv659Hn65Z4LgZdJ7ge5JTVbE3rqbJaaXgW5LEI9/tOaXclfIZ8DW7D7FCWWWmWiiPS7AC48S8kf3DApSxQdgA=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001400.tgz"
-  "version" "1.0.30001400"
+  "integrity" "sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz"
+  "version" "1.0.30001402"
 
 "chalk@^2.0.0":
   "integrity" "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
@@ -869,7 +869,7 @@
     "escape-string-regexp" "^1.0.5"
     "supports-color" "^5.3.0"
 
-"chalk@^4.0.0":
+"chalk@^4.0.0", "chalk@4.1.2":
   "integrity" "sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA=="
   "resolved" "https://registry.npmjs.org/chalk/-/chalk-4.1.2.tgz"
   "version" "4.1.2"
@@ -1020,9 +1020,9 @@
     "underscore-keypath" "~0.0.22"
 
 "electron-to-chromium@^1.4.251":
-  "integrity" "sha512-k4o4cFrWPv4SoJGGAydd07GmlRVzmeDIJ6MaEChTUjk4Dmomn189tCicSzil2oyvbPoGgg2suwPDNWq4gWRhoQ=="
-  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.251.tgz"
-  "version" "1.4.251"
+  "integrity" "sha512-Sh/7YsHqQYkA6ZHuHMy24e6TE4eX6KZVsZb9E/DvU1nQRIrH4BflO/4k+83tfdYvDl+MObvlqHPRICzEdC9c6Q=="
+  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.254.tgz"
+  "version" "1.4.254"
 
 "emittery@^0.10.2":
   "integrity" "sha512-aITqOwnLanpHLNXZJENbOgjUBeHocD+xsSJmNrjovKBW5HbSpW3d1pEls7GFQPUWXiwG9+0P4GtHfEqC/4M0Iw=="
@@ -2351,9 +2351,9 @@
     "picocolors" "^1.0.0"
 
 "user-agents@^1.0.559":
-  "integrity" "sha512-0jwyrJ4k5UhlnEHFcbs2pr0/fTbWVnKFpN3hYjDRjKAF6WonoFWy1UFvfGMJc90xXprgsXxHd4dDSxlEmcX7AA=="
-  "resolved" "https://registry.npmjs.org/user-agents/-/user-agents-1.0.1137.tgz"
-  "version" "1.0.1137"
+  "integrity" "sha512-6oBExqXUM9HfoDldSWe/KNJcYrAsm11+j1ItxvAEmabbsKJXJdTltK5uBowF59kF/4PfPgXBuRzTc3u/02snQQ=="
+  "resolved" "https://registry.npmjs.org/user-agents/-/user-agents-1.0.1141.tgz"
+  "version" "1.0.1141"
   dependencies:
     "dot-json" "^1.2.2"
     "lodash.clonedeep" "^4.5.0"
