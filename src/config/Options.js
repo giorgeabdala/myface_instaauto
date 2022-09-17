@@ -1,7 +1,10 @@
 'use strict';
 
 const Config = require("./Config");
-const chalk = require("chalk");
+const Chalk = require("chalk");
+const {findGenderByName} = require("../gender");
+
+
 // Optional: Custom logger with timestamps
 const log = (fn, ...args) => console[fn](new Date().toISOString(), ...args);
 const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'warn'].map((fn) => [fn, (...args) => log(fn, ...args)]));
@@ -52,13 +55,21 @@ const options = {
     //shouldFollowUser: null,
     //Example to skip bussiness accounts
     shouldFollowUser: function (data) {
-        console.log(chalk.blue('isBusinessAccount:', data.isBusinessAccount));
-        console.log(chalk.blue('isProfessionalAccount:', data.isProfessionalAccount));
-        console.log(chalk.blue('fullName:', data.fullName));
+        //ignora contas comerciais e profissionais
+        console.log(Chalk.blue('isBusinessAccount:', data.isBusinessAccount));
+        console.log(Chalk.blue('isProfessionalAccount:', data.isProfessionalAccount));
+        console.log(Chalk.blue('fullName:', data.fullName));
         if (data.isBusinessAccount || data.isProfessionalAccount) return false;
+        //ignora Homens
+        const first_name = data.fullName.split(' ')[0];
+        const gender = findGenderByName(first_name);
+        console.log(Chalk.red(first_name));
+        console.log(Chalk.red('gender:', gender));
+        if (gender === 'M') return false;
 
-        console.log(chalk.blue('username:', data.username));
-        console.log(chalk.blue('Bio:', data.biography));
+        //ignora Keywords
+        console.log(Chalk.blue('username:', data.username));
+        console.log(Chalk.blue('Bio:', data.biography));
         let keywords = Config.KeyExcludes;
         return !(keywords.find(v => data.username.includes(v)) !== undefined || keywords.find(v => data.biography.includes(v)) !== undefined);
     },

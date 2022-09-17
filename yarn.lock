@@ -2011,6 +2011,11 @@
   "resolved" "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
   "version" "1.1.0"
 
+"ptbr@^1.0.1":
+  "integrity" "sha512-ClsvAcGeMBawGOOEw42YakYVUe10O7/HKj7Yx7AYpvz7uXW701eeViKKIdACbPsB9p0BH/pK7pwrSkqbh8XhvQ=="
+  "resolved" "https://registry.npmjs.org/ptbr/-/ptbr-1.0.1.tgz"
+  "version" "1.0.1"
+
 "pump@^3.0.0":
   "integrity" "sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww=="
   "resolved" "https://registry.npmjs.org/pump/-/pump-3.0.0.tgz"

@@ -9,26 +9,29 @@ let Bot = {
 async function start_see_story(headless = false) {
     try {
         await init(headless);
-        //gera numero aleatorio entre 3 e 10. Esse numero é a quantidade de vezes que o script irá entrar para ver os stories
-        let count = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+        //gera numero aleatorio entre 2 e 5. Esse numero é a quantidade de vezes que o script irá entrar para ver os stories
+        const random = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
 
-        for (let i = 0; i < count; i++) {
-            await open_insta();
+        for (let i = 0; i < count; i++)
+            await open_and_see();
 
-            //gera número randômico entre 3 e 10. Quantidade de storuy quer irá visualizar.
-            let see_max = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
-            for (let seeing = 0; seeing < see_max; seeing++) {
-                await see_story();
-             }
-            await close_story();
-            await random_sleep();
-        }
         await close();
 
         }
         catch (err) {
         console.error(err);
     }
+}
+
+async function open_and_see() {
+    await open_insta();
+    //gera número randômico entre 3 e 10. Quantidade de storuy quer irá visualizar.
+    let see_max = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+    for (let seeing = 0; seeing < see_max; seeing++) {
+        await see_story();
+    }
+    await close_story();
+    await random_sleep();
 }
 
 async function see_story() {
@@ -131,8 +134,6 @@ async function init(headless = false) {
 async function close() {
     await Bot.instauto.close();
 }
-
-//start_see_story();
 
 module.exports = {like_story, init, open_insta, close_story, first_story, next_story, see_story, close, start_see_story};
 

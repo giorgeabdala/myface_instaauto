@@ -519,7 +519,6 @@ const Instauto = async (db, browser, options) => {
 
         while (hasNextPage) {
             const url = `${graphqlUrl}&variables=${JSON.stringify(graphqlVariables)}`;
-            // logger.log(url);
             await page.goto(url);
             const json = await getPageJson();
 
@@ -536,7 +535,6 @@ const Instauto = async (db, browser, options) => {
 
             if (hasNextPage) {
                 logger.log(`Has more pages (current ${i})`);
-                // await sleep(300);
             }
 
             yield ret;
@@ -685,7 +683,6 @@ const Instauto = async (db, browser, options) => {
 
         const { edge_followed_by: { count: followedByCount }, edge_follow: { count: followsCount }, is_private: isPrivate, is_verified: isVerified, is_business_account: isBusinessAccount, is_professional_account: isProfessionalAccount, full_name: fullName, biography, profile_pic_url_hd: profilePicUrlHd, external_url: externalUrl, business_category_name: businessCategoryName, category_name: categoryName } = graphqlUser;
 
-        // logger.log('followedByCount:', followedByCount, 'followsCount:', followsCount);
 
         const ratio = followedByCount / (followsCount || 1);
 
