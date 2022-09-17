@@ -3,10 +3,11 @@ const {optionsFollowFollowers} = require("./config/Options");
 
 let Bot = {
     instauto: null,
-    page: null,
+    browser: null,
 }
 
 async function start_follow_followers(sleep, headless = false) {
+    if(!Bot.instauto) Bot = await BotFactory(headless);
     follow_followers(headless,optionsFollowFollowers, sleep);
     await Bot.instauto.sleep(10 * 60 * 1000);
     console.log('Done running');
@@ -15,8 +16,7 @@ async function start_follow_followers(sleep, headless = false) {
 
 async function follow_followers(headless = false, options = optionsFollowFollowers, sleep = 60) {
     try {
-
-        Bot = await BotFactory(headless);
+        if(!Bot.instauto) Bot = await BotFactory(headless);
         await Bot.instauto.set_sleep(sleep);
         await Bot.instauto.followUsersFollowers(options);
     } catch (err) {

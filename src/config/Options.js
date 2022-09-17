@@ -1,6 +1,7 @@
 'use strict';
 
 const Config = require("./Config");
+const chalk = require("chalk");
 // Optional: Custom logger with timestamps
 const log = (fn, ...args) => console[fn](new Date().toISOString(), ...args);
 const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'warn'].map((fn) => [fn, (...args) => log(fn, ...args)]));
@@ -54,12 +55,12 @@ const options = {
     //Example to skip bussiness accounts
 
     shouldFollowUser: function (data) {
-        console.log('isBusinessAccount:', data.isBusinessAccount);
-        console.log('isProfessionalAccount:', data.isProfessionalAccount);
-        console.log('fullName:', data.fullName);
-        if (data.isBusinessAccount || data.isProfessionalAccount) {
-            return false;
-        }
+        console.log(chalk.blue('isBusinessAccount:', data.isBusinessAccount));
+        console.log(chalk.blue('isProfessionalAccount:', data.isProfessionalAccount));
+        console.log(chalk.blue('fullName:', data.fullName));
+        if (data.isBusinessAccount || data.isProfessionalAccount) return false;
+
+        return true;
     },
 
     /* Example to skip accounts with 'crypto' & 'bitcoin' in their bio or username
