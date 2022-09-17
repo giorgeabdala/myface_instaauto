@@ -1,10 +1,6 @@
 const See_story = require('./see_story');
 const Follow_followers = require("./follow_followers");
 
-
-
-
-
 async function start_boot(){
     while (true){
         const activity = Math.floor(Math.random() * 3);
@@ -25,14 +21,6 @@ async function start_boot(){
 }
 
 start_boot();
-
-
-
-
-
-
-
-
 
 
 
