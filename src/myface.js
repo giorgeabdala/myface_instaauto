@@ -10,7 +10,7 @@ async function start_boot(){
         if (random < 0.5){
             await see_story.start_see_story(false);
         }else{
-            await follonw_follower.start_follow_followers(false);
+            await follonw_follower.start_follow_followers(30, false);
         }
    }
 }
