@@ -69,4 +69,4 @@ async function BotFactory(headless = false) {
 
 
 
-module.exports = {getInstaAuto, BotFactory};
+module.exports = {BotFactory};
