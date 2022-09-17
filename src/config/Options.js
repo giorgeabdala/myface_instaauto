@@ -7,7 +7,7 @@ const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'wa
 
 const optionsFollowFollowers = {
     usersToFollowFollowersOf: ['ciliosclub', 'cilioscuritibastudio', 'studiocarol.silva', 'amanda.lashh', 'jacque.bodner', 'cilios_curitiba', 'manuellalashdesigner_', 'studiodannimiranda', 'julianapiassi_olhar','cilios_julianaborges', 'ciliosmai.curitiba',  'donnadesioficialcilios', 'heloferreira.beauty', 'daniele.souzalashdesign', 'thaillasantos_'],
-    maxFollowsTotal: 5,
+    maxFollowsTotal: 60,
     skipPrivate: false,
     enableLikeImages: true,
     likeImagesMax: 2,
