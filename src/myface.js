@@ -17,7 +17,7 @@ async function start_boot(){
                 await Follow_followers.follow_followers(true,  30);
                 break;
             case 2:
-                await Follow_followers.unfollow_non_followers(true, );
+                await Follow_followers.unfollow_non_followers(true );
                 break;
 
         }
