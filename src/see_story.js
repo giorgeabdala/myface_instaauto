@@ -10,7 +10,7 @@ async function start_see_story(headless = false) {
     try {
         await init(headless);
         //gera numero aleatorio entre 2 e 5. Esse numero é a quantidade de vezes que o script irá entrar para ver os stories
-        const random = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
+        const count = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
 
         for (let i = 0; i < count; i++)
             await open_and_see();
