@@ -5,6 +5,7 @@ async function start_boot(){
     while (true){
         const activity = Math.floor(Math.random() * 3);
 
+
         switch (activity) {
             case 0:
                 await See_story.start_see_story(true);

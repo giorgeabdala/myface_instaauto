@@ -11,7 +11,7 @@ const logger = Object.fromEntries(['log', 'info', 'debug', 'error', 'trace', 'wa
 
 const optionsFollowFollowers = {
     usersToFollowFollowersOf: Config.usersToFollowFollowersOf,
-    maxFollowsTotal: 60,
+    maxFollowsTotal: 100,
     skipPrivate: false,
     enableLikeImages: true,
     likeImagesMax: 2,
