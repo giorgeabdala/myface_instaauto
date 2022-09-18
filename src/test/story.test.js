@@ -67,6 +67,10 @@ describe("Testa a função de seguir seguidores", () => {
         return expect(await findGenderByName("João")).toBe('M');
     } );
 
+    it('Testar unfollow', async () => {
+        return expect(await followFollowers.unfollow_non_followers(true)).resolves;
+    } );
+
 it("Deve começar a seguir os seguidores", async () => {
         options = optionsFollowFollowers;
         options.maxFollowsTotal = 1;
@@ -74,8 +78,7 @@ it("Deve começar a seguir os seguidores", async () => {
         return expect(await followFollowers.follow_followers(true, options, 1)).resolves;
     })
 
-
-    });
+});
 
 
 

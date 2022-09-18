@@ -1,10 +1,7 @@
 const {optionsStory: options} = require("./config/Options");
 const {BotFactory} = require("./instauto/conecction");
 
-let Bot = {
-    instauto: null,
-    page: null,
-}
+let {Bot} = require("./Bot");
 
 async function start_see_story(headless = false) {
     try {
@@ -126,7 +123,6 @@ async function open_insta() {
 
 }
 
-
 async function close() {
     await Bot.instauto.close();
 }
@@ -137,4 +133,3 @@ async function init() {
 }
 
 module.exports = {like_story, open_insta, close_story, first_story, next_story, see_story, close, start_see_story, init};
-

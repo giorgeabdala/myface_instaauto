@@ -1,10 +1,7 @@
 const {BotFactory} = require("./instauto/conecction");
 const {optionsFollowFollowers} = require("./config/Options");
+let {Bot} = require("./Bot");
 
-let Bot = {
-    instauto: null,
-    page: null,
-}
 
 async function follow_followers(headless = false, sleep = 60, options = optionsFollowFollowers) {
     try {
