@@ -8,7 +8,7 @@ let Bot = {
 
 async function start_see_story(headless = false) {
     try {
-        if(Bot.page == null || Bot.page.isClosed()) Bot = await BotFactory(headless);
+        Bot = await BotFactory(headless);
         //gera numero aleatorio entre 2 e 5. Esse numero é a quantidade de vezes que o script irá entrar para ver os stories
         const count = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
 

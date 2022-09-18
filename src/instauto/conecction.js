@@ -12,7 +12,7 @@ const Bot = {
 
 
 let instance_InstaAuto = null;
-let instance_InstaAuto_headless = null;
+
 
 async function getInstance(head_less = false) {
     let browser, instance;
@@ -38,18 +38,9 @@ async function getInstance(head_less = false) {
     return instance;
 }
 
-
-async function getInstaAuto_headless() {
-    if (instance_InstaAuto_headless === null) {
-        return getInstance(true);
-
-} }
-
-
 async function getInstaAuto(headless= false) {
-    if(headless) return getInstaAuto_headless();
-    if (instance_InstaAuto === null) {
-        return getInstance(false);
+    if (instance_InstaAuto === null || !instance_InstaAuto.getBrowser.isConnected() ||  instance_InstaAuto.getPage().isClosed()) {
+        return getInstance(headless);
     }
     return instance_InstaAuto;
 }
