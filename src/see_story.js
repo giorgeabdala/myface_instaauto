@@ -131,5 +131,10 @@ async function close() {
     await Bot.instauto.close();
 }
 
-module.exports = {like_story, open_insta, close_story, first_story, next_story, see_story, close, start_see_story};
+//todo funcao só existe por causa dos testes. Ajeitar depois
+async function init() {
+    Bot = await BotFactory(true);
+}
+
+module.exports = {like_story, open_insta, close_story, first_story, next_story, see_story, close, start_see_story, init};
 

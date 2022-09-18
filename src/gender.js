@@ -4,7 +4,12 @@ const ptbr = require('ptbr');
 function findGenderByName(name) {
     name = ptbr.removeAcentos(name);
     name = name.toUpperCase();
-    return nomes.filter(data => data.first_name === name)[0].classification;
+    const resultado =  nomes.filter(data => data.first_name === name);
+
+    if (resultado.length > 0)
+        return resultado[0].classification;
+
+    return '';
 }
 
 

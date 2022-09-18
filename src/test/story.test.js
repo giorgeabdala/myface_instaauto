@@ -2,11 +2,11 @@ const seeStory = require("../see_story");
 const followFollowers = require("../follow_followers");
 const BotFactory = require("../instauto/conecction").BotFactory;
 const {optionsFollowFollowers} = require("../config/Options");
-
+const {findGenderByName} = require("../gender");
 
 beforeAll(async () => {
-    await seeStory.init(true);
-} );
+    await seeStory.init();
+}  );
 
 afterAll(async () => {
     await seeStory.close();
@@ -63,7 +63,11 @@ describe('Testa as funções de visualização de story', () => {
 describe("Testa a função de seguir seguidores", () => {
     jest.setTimeout(300000);
 
-    it("Deve começar a seguir os seguidores", async () => {
+    it('Testa se está buscando o gender corretamente', async () => {
+        return expect(await findGenderByName("João")).toBe('M');
+    } );
+
+it("Deve começar a seguir os seguidores", async () => {
         options = optionsFollowFollowers;
         options.maxFollowsTotal = 1;
         options.likeImagesMax = 1;
