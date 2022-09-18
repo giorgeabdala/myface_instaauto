@@ -8,7 +8,7 @@ let Bot = {
 
 async function start_see_story(headless = false) {
     try {
-        await init(headless);
+        if(Bot.page == null || Bot.page.isClosed()) Bot = await BotFactory(headless);
         //gera numero aleatorio entre 2 e 5. Esse numero é a quantidade de vezes que o script irá entrar para ver os stories
         const count = Math.floor(Math.random() * (5 - 2 + 1)) + 2;
 
@@ -126,14 +126,10 @@ async function open_insta() {
 
 }
 
-async function init(headless = false) {
-    Bot = await BotFactory(headless);
-
-}
 
 async function close() {
     await Bot.instauto.close();
 }
 
-module.exports = {like_story, init, open_insta, close_story, first_story, next_story, see_story, close, start_see_story};
+module.exports = {like_story, open_insta, close_story, first_story, next_story, see_story, close, start_see_story};
 

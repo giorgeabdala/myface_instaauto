@@ -3,13 +3,12 @@ const {optionsFollowFollowers} = require("./config/Options");
 
 let Bot = {
     instauto: null,
-    browser: null,
+    page: null,
 }
-
 
 async function follow_followers(headless = false, sleep = 60, options = optionsFollowFollowers) {
     try {
-        if(!Bot.instauto) Bot = await BotFactory(headless);
+        if(Bot.page == null || Bot.page.isClosed()) Bot = await BotFactory(headless);
         await Bot.instauto.set_sleep(sleep);
         await Bot.instauto.followUsersFollowers(options);
         await Bot.instauto.sleep(10 * sleep * 1000);
@@ -23,7 +22,7 @@ async function follow_followers(headless = false, sleep = 60, options = optionsF
 
 async function unfollow_non_followers(headless = false, max = 10) {
     try {
-        if(!Bot.instauto) Bot = await BotFactory(headless);
+        if(Bot.page == null || Bot.page.isClosed()) Bot = await BotFactory(headless);
         await Bot.instauto.unfollowNonMutualFollowers( {limit: max} );
     } catch (err) {
         console.error(err);
